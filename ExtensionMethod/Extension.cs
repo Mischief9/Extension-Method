@@ -6,9 +6,9 @@ namespace ExtensionMethod
 {
     public static class Extension
     {
-       public delegate void InputDelegate<T>(T[] mass);
-       public static  IEnumerable<T> ThisDoesntMakeAnySense<T>(this T[] mass,Predicate<T> pred,InputDelegate<T> newInput)
-        {
+       public delegate T[] InputDelegate<T>();
+       public static void ThisDoesntMakeAnySense<T>(this IEnumerable<T> mass,Predicate<T> pred,InputDelegate<T> newInput)
+       { 
             if(mass == null || pred == null || newInput==null)
             {
                 throw new NullReferenceException("Invalid Parameter: NULL exception.");
@@ -18,11 +18,20 @@ namespace ExtensionMethod
             {
                 if(pred(x))
                 {
-                  return new T[] { default(T) };
+                  Console.Write("1)Default Value When Predicate is true: ");
+                  if (default(T) == null)
+                       Console.Write("NULL");
+                  else Console.Write(default(T)); 
+                  return;
+
                 }
             }
-            newInput(mass);
-            return mass;
+            Console.Write("2)New Array When Predicate is false (2 value) : ");
+            mass = newInput();
+            foreach(var x in mass)
+            {
+                Console.Write(x + " ");
+            }
         }
     }
 }

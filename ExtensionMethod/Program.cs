@@ -6,7 +6,7 @@ namespace ExtensionMethod
     {
         static void Main(string[] args)
         {
-            Console.Write("maita masivi");
+            Console.Write("Input Array");
             Console.WriteLine();
             string FutureArray = Console.ReadLine();
 
@@ -40,30 +40,21 @@ namespace ExtensionMethod
 
             Console.WriteLine();
             ////////////////////////////////
-            #region პრედიკატის დაკმაყოფილება
-            IEnumerable<int> newMass = Exist.ThisDoesntMakeAnySense(x => x % 2 == 0 || true, Input);
+            #region პრედიკატის დაკმაყოფილება 
 
-            IEnumerator<int> NewMassEnumerator = newMass.GetEnumerator();
-            Console.Write("1)Default Value When Predicate is true: ");
-            while (NewMassEnumerator.MoveNext())
-            {
-                Console.Write(NewMassEnumerator.Current);
-            }
-
+            Exist.ThisDoesntMakeAnySense(x => x % 2 == 0 || true, ()=> { return null; });
             Console.WriteLine();
+
             #endregion
             ///////////////////////////////
 
             ////////////////////////////////
             #region პრედიკატის არ შესრულების შემთხვევაში (ახალი ჩანაწერი)
-            IEnumerable<int> newMassForDefault = Exist.ThisDoesntMakeAnySense(x => false, Input);// პრედიკატი არასდროს დაკმაყოფილდება 
 
-            IEnumerator<int> NewMassEnumeratorForDefault = newMassForDefault.GetEnumerator();
-            Console.Write("2)New Array When Predicate is false (value+1): ");
-            while (NewMassEnumeratorForDefault.MoveNext())
-                Console.Write(NewMassEnumeratorForDefault.Current + " ");
-
+            Exist.ThisDoesntMakeAnySense(x => false, ()=> { Random x = new Random();
+                                                            return new int[] { x.Next(600), x.Next(600) }; });// პრედიკატი არასდროს დაკმაყოფილდება 
             Console.WriteLine();
+
             #endregion
             ///////////////////////////////
 
@@ -71,7 +62,7 @@ namespace ExtensionMethod
             #region პარამეტრების NULL გადაცემა
             try
             {
-                IEnumerable<int> newMassNULL = Exist.ThisDoesntMakeAnySense(null, null);
+              Exist.ThisDoesntMakeAnySense(null, null);
             }
             catch (NullReferenceException e)
             {
@@ -80,14 +71,6 @@ namespace ExtensionMethod
             #endregion
             ///////////////////////////////
             Console.ReadLine();
-        }
-
-        public static void Input(int[] mass)
-        {
-            for(int i =0;i<mass.Length;i++)
-            {
-                mass[i] =mass[i]+1;
-            }
         }
     }
 }
