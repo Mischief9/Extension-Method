@@ -42,8 +42,9 @@ namespace ExtensionMethod
             ////////////////////////////////
             #region პრედიკატის დაკმაყოფილება 
 
-            Exist.ThisDoesntMakeAnySense(x => x % 2 == 0 || true, ()=> { return null; });
-            Console.WriteLine();
+            Console.Write("1)Default Value When Predicate is true: ");
+            var num = Exist.ThisDoesntMakeAnySense(x => x % 2 == 0 || true, ()=> { return null; });
+            Console.WriteLine(num[0]);
 
             #endregion
             ///////////////////////////////
@@ -51,9 +52,10 @@ namespace ExtensionMethod
             ////////////////////////////////
             #region პრედიკატის არ შესრულების შემთხვევაში (ახალი ჩანაწერი)
 
-            Exist.ThisDoesntMakeAnySense(x => false, ()=> { Random x = new Random();
-                                                            return new int[] { x.Next(600), x.Next(600) }; });// პრედიკატი არასდროს დაკმაყოფილდება 
-            Console.WriteLine();
+            Console.Write("2)New Array When Predicate is false : ");
+            num = Exist.ThisDoesntMakeAnySense(x => false, ()=> { Random x = new Random();
+                                                            return new int[] { x.Next(600)}; });// პრედიკატი არასდროს დაკმაყოფილდება 
+            Console.WriteLine(num[0]);
 
             #endregion
             ///////////////////////////////
